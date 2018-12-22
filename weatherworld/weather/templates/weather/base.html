@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
-    <link>{% block css %}{% endblock %}</link>
+    {% block css %}
+
+    {% endblock %}
 </head>
 <body>
 {% block body %}

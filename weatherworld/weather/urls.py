@@ -3,5 +3,5 @@ from .views import *
 
 app_name = 'weatherApp'
 urlpatterns = [
-    url(r'^$', Weatherindex.as_view(), name='index'),
+    url(r'^$', WeatherIndex.as_view(), name='index'),
 ]

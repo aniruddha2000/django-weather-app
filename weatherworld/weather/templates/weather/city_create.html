@@ -1,0 +1,16 @@
+{% extends 'weather/base.html' %}
+{% load static %}
+
+{% block title %}Weather World{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" hre="{% static 'weather/bootstrap.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <form method="post">
+        {{ form }}
+    </form>
+</div>
+{% endblock %}
