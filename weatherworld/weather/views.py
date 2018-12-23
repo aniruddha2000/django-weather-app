@@ -23,7 +23,11 @@ class WeatherIndex(View):
             }
 
             weather_data.append(weather)
-        context = {'weather_data': weather_data}
+        form = CityForm
+        context = {
+            'weather_data': weather_data,
+            'form': form
+        }
         return  render(request, self.template_name, context)
 
 
