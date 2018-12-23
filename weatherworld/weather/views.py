@@ -9,12 +9,12 @@ class WeatherIndex(View):
     template_name = 'weather/city_create.html'
 
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         cities = City.objects.all()
-        url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=9442c7cf14667f27786f5f4c023707c8'
+        url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=368a136ce5d41f1d9c904c8201b2d4b5'
         weather_data = []
         for city in cities:
-            city_weather = request.get(url.format(city)).json()
+            city_weather = requests.get(url.format(city)).json()
             weather = {
                 'city': city,
                 'temperature': city_weather['main']['temp'],
@@ -27,7 +27,7 @@ class WeatherIndex(View):
         return  render(request, self.template_name, context)
 
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         form = CityForm(request.POST)
 
         if form.is_valid():

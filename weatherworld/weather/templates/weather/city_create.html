@@ -4,12 +4,12 @@
 {% block title %}Weather World{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" hre="{% static 'weather/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'weather/bootstrap.css' %}">
 {% endblock %}
 
 {% block body %}
 <div class="container">
-    <form method="post">
+    <form method="post" action="{% url 'weatherApp:index' %}">
         {{ form }}
     </form>
 </div>
