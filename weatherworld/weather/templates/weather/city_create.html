@@ -9,8 +9,29 @@
 
 {% block body %}
 <div class="container">
+    <h1 class="title">
+        What's the weather like?
+    </h1>
+    <br>
     <form method="post" action="{% url 'weatherApp:index' %}">
-        {{ form }}
+        {% csrf_token %}
+        {{ form.name }}
+        <br>
+        <button class="button is-info">
+            Add City
+        </button>
     </form>
+    <br>
+    {% for weather in weather_data %}
+    <figure class="image is-50x50">
+        <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
+    </figure>
+    <p>
+        <span class="title">{{ weather.city }}</span>
+        <br>
+        <span class="subtitle">{{ weather.temperature }}</span>
+        <br> {{ weather.description }}
+    </p>
+    {% endfor %}
 </div>
 {% endblock %}

@@ -1,4 +1,4 @@
-from django.views.generic import View
+from django.views import View
 from .models import City
 from .forms import CityForm
 import requests
@@ -7,10 +7,13 @@ from django.shortcuts import render
 class WeatherIndex(View):
 
     template_name = 'weather/city_create.html'
+    queryset = City.objects.all()
 
+    def get_queryset(self):
+        return self.queryset
 
-    def get(self, request):
-        cities = City.objects.all()
+    def get(self, request, *args, **kwargs):
+        cities = self.get_queryset()
         url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=368a136ce5d41f1d9c904c8201b2d4b5'
         weather_data = []
         for city in cities:
@@ -23,7 +26,11 @@ class WeatherIndex(View):
             }
 
             weather_data.append(weather)
-        context = {'weather_data': weather_data}
+        form = CityForm()
+        context = {
+            'weather_data': weather_data,
+            'form': form,
+        }
         return  render(request, self.template_name, context)
 
 
