@@ -50,6 +50,10 @@
                                 <figure class="image is-50x50">
                                     <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
                                 </figure>
+                                <form action="{% url 'weatherApp:delete' pk=city_weather.city.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button>Delete</button>
+                                </form>
                             </div>
                             <div class="media-content">
                                 <div class="content">
@@ -70,4 +74,7 @@
     </section>
     <footer class="footer">
     </footer>
+{% if message %}
+<p>{{ message }}</p>
+{% endif %}
 {% endblock %}

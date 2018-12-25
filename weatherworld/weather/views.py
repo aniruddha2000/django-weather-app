@@ -1,9 +1,9 @@
-from django.views.generic import View
+from django.views.generic import View, DeleteView
 from django.shortcuts import render
+from django.urls import reverse_lazy
 import requests
 from .models import City
 from .forms import CityForm
-
 
 
 class WeatherIndex(View):
@@ -16,6 +16,7 @@ class WeatherIndex(View):
         context = {
             'form': form,
         }
+
         return render(request, self.template_name, context)
 
 
@@ -45,3 +46,8 @@ class WeatherIndex(View):
             'form': form
         }
         return render(request, self.template_name, context)
+
+class WeatherDeleteView(DeleteView):
+
+    model = City
+    success_url = reverse_lazy('weatherApp:index')
